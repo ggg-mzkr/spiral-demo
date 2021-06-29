@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="@{locale}">
+<html>
 <head>
     <title>${title}</title>
-    <block:head>
-        <stack:collect name="styles" level="2"/>
-    </block:head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <block:body/>
-<stack:collect name="scripts" level="1"/>
 </body>
-<hidden>${context}</hidden>
 </html>

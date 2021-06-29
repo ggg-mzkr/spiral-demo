@@ -25,7 +25,7 @@ return [
      */
     'databases' => [
         'default' => [
-            'driver' => 'sqlite',
+            'driver' => 'mysql',
         ],
     ],
 
@@ -40,6 +40,12 @@ return [
             'driver'     => \Spiral\Database\Driver\SQLite\SQLiteDriver::class,
             'connection' => 'sqlite:' . directory('root') . 'app.db',
             'profiling'  => true,
+        ],
+        'mysql' => [
+            'driver'     => \Spiral\Database\Driver\MySQL\MySQLDriver::class,
+            'connection' => sprintf('mysql:host=%s;dbname=%s', env('DB_HOST'), env('DB_NAME')),
+            'username'   => env('DB_USER'),
+            'password'   => env('DB_PASSWORD'),
         ],
     ],
 ];

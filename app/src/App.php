@@ -13,11 +13,14 @@ namespace App;
 
 use App\Bootloader;
 use Spiral\Bootloader as Framework;
+use Spiral\DataGrid\Annotation\DataGrid;
+use Spiral\DataGrid\Bootloader as Grid;
 use Spiral\DotEnv\Bootloader as DotEnv;
 use Spiral\Framework\Kernel;
 use Spiral\Monolog\Bootloader as Monolog;
 use Spiral\Nyholm\Bootloader as Nyholm;
 use Spiral\Prototype\Bootloader as Prototype;
+use Spiral\Router\Bootloader as Router;
 use Spiral\Scaffolder\Bootloader as Scaffolder;
 use Spiral\Stempler\Bootloader as Stempler;
 
@@ -73,6 +76,8 @@ class App extends Kernel
 
         // Extensions and bridges
         Stempler\StemplerBootloader::class,
+        Router\AnnotatedRoutesBootloader::class,
+        Grid\GridBootloader::class,
 
         // Framework commands
         Framework\CommandBootloader::class,
@@ -89,7 +94,8 @@ class App extends Kernel
      */
     protected const APP = [
         Bootloader\LocaleSelectorBootloader::class,
-        Bootloader\RoutesBootloader::class,
+        Bootloader\FakerBootloader::class,
+        Bootloader\AppBootloader::class,
 
         // fast code prototyping
         Prototype\PrototypeBootloader::class,

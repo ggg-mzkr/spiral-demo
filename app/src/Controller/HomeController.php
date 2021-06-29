@@ -11,40 +11,31 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Job\Ping;
-use Spiral\Prototype\Traits\PrototypeTrait;
+use Faker\Generator;
+use Spiral\Router\Annotation\Route;
+use Spiral\Views\ViewsInterface;
 
 class HomeController
 {
-    use PrototypeTrait;
 
+    /** @var ViewsInterface */
+    private $views;
     /**
-     * @return string
+     * @param ViewsInterface $views
      */
-    public function index(): string
+    public function __construct(ViewsInterface $views)
     {
-        return $this->views->render('home.dark.php');
+        $this->views = $views;
     }
-
     /**
-     * Example of exception page.
-     *
-     * @throws \Error
+     * @Route(route="/", name="index", methods={"GET"})
      */
-    public function exception(): void
+    public function index(Generator $generator): string
     {
-        echo $undefined;
-    }
+        $sentence = $generator->sentence(128);
 
-    /**
-     * @return string
-     */
-    public function ping(): string
-    {
-        $jobID = $this->queue->push(Ping::class, [
-            'value' => 'hello world',
+        return $this->views->render('home.dark.php', [
+            'sentence' => $sentence,
         ]);
-
-        return sprintf('Job ID: %s', $jobID);
     }
 }
